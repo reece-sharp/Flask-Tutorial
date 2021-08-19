@@ -1,0 +1,24 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Lexis Lectoris</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>Lexis Lectoris</h1>
+  <ul>
+    {% if g.user %}
+      <li><a href ="{{url_for('library.index')}}"><span>{{ g.user['username'] }}'s Library</span></a>
+      <li><a href="{{ url_for('auth.logout') }}"><span>Log Out</span></a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}"><span>Register</span></a>
+      <li><a href="{{ url_for('auth.login') }}"><span>Log In</span></a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>

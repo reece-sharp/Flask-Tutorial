@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS books;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -7,14 +8,13 @@ CREATE TABLE user (
   password TEXT NOT NULL
 );
 
-CREATE TABLE post (
+CREATE TABLE books (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  author_id INTEGER NOT NULL,
-  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  title TEXT NOT NULL,
-  body TEXT NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES user (id)
+  username TEXT NOT NULL,
+  title TEXT  NOT NULL
+  -- i want to make it so that the title does not need to be unique but so that the title and authro combo must be
 );
+
 
 -- In SQLite, data is stored in tables and columns.
 -- These need to be created before you can store and retrieve data.

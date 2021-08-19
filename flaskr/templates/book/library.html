@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Library{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('library.create') }}">Add a New Book</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for book in books %}
+    <article class="post">
+      <header>
+        <div>
+          <h1>{{ books['username'] }}</h1>
+        </div>
+      </header>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+<!-- 'library.index' is refering to the library.py file an dthe create function -->
+<!-- taken form index section of the blog blueprint part of teh flask titorial -->

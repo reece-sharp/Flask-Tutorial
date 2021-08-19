@@ -1,6 +1,9 @@
 import os
 
 from flask import Flask
+import os
+
+from flask import Flask
  # this creates the application
 
 def create_app(test_config=None):  # def is the syntax to create a function
@@ -13,6 +16,7 @@ def create_app(test_config=None):  # def is the syntax to create a function
         # SECRET_KEY: Its set to 'dev' to provide a convenient value during development
         # SECRET_KEY: but it should be overridden with a random value when deploying
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        # this is where my database is stored
     )
 
     if test_config is None:
@@ -31,13 +35,6 @@ def create_app(test_config=None):  # def is the syntax to create a function
     except OSError:
         pass
 
-    # a simple page that says hello
-    @app.route('/hello')  # my app is located at this URL and i need to include /hello to get here
-    # creates a simple route so you can see the application working before getting into the rest of the tutorial.
-    # It creates a connection between the URL /hello and a function that returns a response,
-    # the string 'Hello, World!' in this case.
-    def hello():
-        return 'Hello, World!'
 
 
 
@@ -45,6 +42,13 @@ def create_app(test_config=None):  # def is the syntax to create a function
     from . import db # import the db.py script
     db.init_app(app) # making it possible to use the db script with the flask applictaion
     # this ^ IS the app and before it wasn't in teh create app f() so it didnt show up
+
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+    from . import library
+    app.register_blueprint(library.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app
     # return need to be indented to be a part of the f()

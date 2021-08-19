@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Library: Add a New Book{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="Username">Username</label>
+    <input name="username" id="username" required>
+    <label for="title">New Book Title</label>
+    <input type="title" name="title" id="title" required>
+    <input type="submit" value="Create New Book">
+  </form>
+ <!-- took this from login.html so look there for reference -->
+{% endblock %}

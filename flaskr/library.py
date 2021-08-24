@@ -19,13 +19,11 @@ def index():
     userUsername = 'reece'
 
     booksV = db.execute(
-        'SELECT *'
-        'FROM books'
-        'ORDER BY title DESC'
+        'SELECT * FROM books ORDER BY title DESC'
     ).fetchall()
     
-    return str(booksV[0])
-    #return render_template('book/library.html', books = booksV)
+    #return str(booksV[0])
+    return render_template('book/library.html', books = booksV)
 # books in line above is the line 11 in library.html
 
 @bp.route('/create', methods=('GET', 'POST'))
